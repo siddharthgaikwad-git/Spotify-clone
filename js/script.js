@@ -1,8 +1,31 @@
-console.log("lets write JS");
-
 let currentSong = new Audio();
-let songs;
+let songs = [];
 let currFolder;
+
+const songData = {
+    "songs/ncs": [
+        "Guzaara.mp3",
+        "Haye Mera DIL.mp3",
+        "Sheesha.mp3"
+    ],
+
+    "songs/Bairan": [
+        "Bairan.mp3"
+    ],
+
+    "songs/cs": [
+        "Legends of 70s.mp3"
+    ],
+
+    "songs/Dhurandhar": [
+        "Hum Pyaar Karne Wale.mp3",
+        "Jaan Se Guzarte Hain.mp3"
+    ],
+
+    "songs/Karan Aujla": [
+        "For A Reason.mp3"
+    ]
+};
 
 // 1. Helper: Format Time
 function secondsToMinutesSeconds(seconds) {
@@ -40,26 +63,12 @@ function updateSongList() {
 // 3. Fetch Songs
 async function getSongs(folder) {
     currFolder = folder;
-    try {
-        let res = await fetch(`/${folder}/`);
-        let text = await res.text();
-        let div = document.createElement("div");
-        div.innerHTML = text;
 
-        let songsList = [];
-        for (let a of div.getElementsByTagName("a")) {
-            if (a.href.endsWith(".mp3")) {
-                let parts = decodeURI(a.href).split(/[\/\\]/);
-                songsList.push(parts.pop());
-            }
-        }
-        songs = songsList; // Update global songs array
-        updateSongList(); // Refresh the UI
-        return songsList;
-    } catch (err) {
-        console.error("Failed to fetch songs:", err);
-        return [];
-    }
+    songs = songData[folder] || [];
+
+    updateSongList();
+
+    return songs;
 }
 
 const menuIcon = document.getElementById("menuIcon");
@@ -91,7 +100,7 @@ menuIcon.addEventListener("click", () => {
 });
 
 const playMusic = (track, pause = false) => {
-    currentSong.src = `/${currFolder}/` + track;
+    currentSong.src = `${currFolder}/${encodeURIComponent(track)}`;
     if (!pause) {
         currentSong.play();
         play.src = "img/pause.svg";
