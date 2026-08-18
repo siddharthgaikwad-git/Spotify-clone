@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone - Web Player: Music for everyone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utility.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <span class="hamburger">
+            <img id="menuIcon" width="30" src="img/hamburger.svg" alt="menu">
+        </span>
+
+
+        <div class="logo">
+            <img width="30" class="invert" src="img/logo.svg" alt="">
+            <span class="home ">
+                <img src="img/home.svg" alt="" srcset="">
+            </span>
+        </div>
+
+
+
+        <div class="search">
+            <img width="25" class="invert" src="img/search.svg" alt="search">
+            <input type="text" placeholder="What do you want to play?">
+        </div>
+
+        <div class="rightnav">
+
+            <div class="buttons">
+                <button class="hover nav-btn">Premimum</button>
+                <button class="hover nav-btn">Support</button>
+                <button class="hover nav-btn">Download</button>
+                <div class="line nav-btn1"></div>
+
+                <span class="sp hover ps">
+                    <img class="ps nav-btn nav-btn1" width="15" src="img/download.svg" alt=""><a
+                        class="hover f-1 p-1 ps bkel nav-btn nav-btn1" href="">Install App</a>
+                </span>
+
+                <div class="btn-last">
+                    <button id="sign" class="hover f-1 p-1">Sign in</button>
+                    <button class="log" id="log-in">Log in</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="container flex bg-black">
+        <div class="left bg">
+            <div class="library rounded m-1 p-1 bg-grey">
+                <div class="heading p-1">
+                    <h3>
+                        Your Library
+                    </h3>
+
+
+                </div>
+
+                <div class="songList">
+                    <ul>
+
+                    </ul>
+                </div>
+
+
+                <div class="footer bg-grey">
+
+                    <div><a href=""><span>Legal</span></a></div>
+                    <div><a href=""><span>Privacy Center</span></a></div>
+                    <div><a href=""><span>Privacy Policy</span></a>
+                    </div>
+                    <div><a href=""><span>Cookies</span></a></div>
+                    <div><a href=""><span>About Ads</span></a></div>
+                    <div><a href=""><span>Accessibility</span></a></div>
+
+
+                </div>
+                <div class="footer p-1 engbtn ">
+                    <button class="eng flex g ">
+                        <span class="flex engbtn ">
+                            <img width="15" class="invert " src="img/earth.svg" alt="">
+                        </span>
+                        English</button>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="right bg-grey">
+            <div class="spotifyPlaylists ">
+                <h2>Trending songs</h2>
+                <div class="cardcontainer">
+                   
+                   
+                </div>
+
+                <div class="playbar">
+
+                    <div class="seekbar">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="abovebar">
+
+
+                        <div class="songinfo">
+                        </div>
+                        <div class="songbuttons">
+                            <img id="previous" class="invert" width="25" src="img/prevsong.svg" alt="" srcset="">
+                            <img id="play" class="invert" width="45" src="img/playbtn.svg" alt="" srcset="">
+                            <img id="next" class="invert" width="25" src="img/nextsong.svg" alt="" srcset="">
+                        </div>
+                        <div class="timevol">
+                            <div class="songtime">
+
+                            </div>
+                            <div class="volume">
+                                <img width="20" src="img/volume.svg" alt="" srcset="">
+                                <div class="range">
+                                    <input type="range" name="volume">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
