@@ -43,7 +43,7 @@ function updateSongList() {
         songUL.innerHTML += `<li><img src="img/music.svg" alt="">
                                 <div class="info">
                                     <div>${song}</div>
-                                    <div>Harry</div>
+                                    <div>singer</div>
                                 </div>
                                 <div class="playnow">
                                     <span>Play Now</span>
@@ -111,59 +111,62 @@ const playMusic = (track, pause = false) => {
 
 // Gemini code beacuse of code with harry code is not working
 
-async function displayAlbums() {
-    let res = await fetch(`/songs/`);
-    let responseText = await res.text();
-    let div = document.createElement("div");
-    div.innerHTML = responseText;
-    let anchors = div.getElementsByTagName("a");
-    let cardContainer = document.querySelector(".cardcontainer");
+function displayAlbums() {
+    const cardContainer = document.querySelector(".cardcontainer");
 
-    // Use a for...of loop so we can use 'await' safely inside
-    let array = Array.from(anchors);
-    for (let index = 0; index < array.length; index++) {
-        const e = array[index];
-
-        // 1. Decode the URL to handle %5C (\)
-        let decodedHref = decodeURIComponent(e.href);
-
-        // 2. Check if it's a folder inside /songs
-        if (decodedHref.includes("/songs") || decodedHref.includes("\\songs")) {
-
-            // 3. Split by / or \ and get folder name
-            let parts = decodedHref.split(/[\/\\]/);
-            let folder = decodedHref.endsWith("/") || decodedHref.endsWith("\\")
-                ? parts[parts.length - 2]
-                : parts[parts.length - 1];
-
-            if (folder !== "songs" && folder !== "..") {
-                try {
-                    // 4. Fetch the metadata (info.json)
-                    let infoFetch = await fetch(`/songs/${folder}/info.json`);
-                    let infoJson = await infoFetch.json();
-
-                    // 5. Add the card to the container
-                    cardContainer.innerHTML = cardContainer.innerHTML + `
-                    <div data-folder="${folder}" class="card">
-                        <div class="play">
-                            <img src="img/play.svg" alt="">
-                        </div>
-                        <img src="/songs/${folder}/cover.jpg" alt="">
-                        <h3>${infoJson.title}</h3>
-                        <p>${infoJson.description}</p>
-                    </div>`;
-                } catch (error) {
-                    console.error("Error loading info.json for folder:", folder, error);
-                }
-            }
+    const albums = [
+        {
+            folder: "Bairan",
+            title: "Bairan",
+            description: "Banjare songs for you"
+        },
+        {
+            folder: "cs",
+            title: "Legends of 70s",
+            description: "Classic songs collection"
+        },
+        {
+            folder: "Dhurandhar",
+            title: "Dhurandhar",
+            description: "Popular songs"
+        },
+        {
+            folder: "Karan Aujla",
+            title: "Karan Aujla",
+            description: "Popular Punjabi songs"
+        },
+        {
+            folder: "ncs",
+            title: "NCS",
+            description: "No Copyright Songs"
         }
+    ];
+
+    cardContainer.innerHTML = "";
+
+    for (const album of albums) {
+        cardContainer.innerHTML += `
+            <div data-folder="${album.folder}" class="card">
+                <div class="play">
+                    <img src="img/play.svg" alt="Play">
+                </div>
+
+                <img src="songs/${album.folder}/cover.jpg" alt="${album.title}">
+
+                <h3>${album.title}</h3>
+                <p>${album.description}</p>
+            </div>
+        `;
     }
 
-    // 6. Attach Event Listeners to the NEW cards
-    Array.from(document.getElementsByClassName("card")).forEach(e => {
-        e.addEventListener("click", async (item) => {
-            console.log("", item.currentTarget.dataset.folder);
-            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
+    // Add click events to cards
+    Array.from(document.getElementsByClassName("card")).forEach(card => {
+        card.addEventListener("click", async () => {
+
+            const folder = card.dataset.folder;
+
+            songs = await getSongs(`songs/${folder}`);
+
             if (songs.length > 0) {
                 playMusic(songs[0]);
             }
