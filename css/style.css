@@ -1036,3 +1036,32 @@ body {
     }
 
 }
+
+/* ===== Mobile fix: playbar + hamburger ===== */
+@media (max-width: 1000px) {
+
+    /* Playbar screen chya khali fixed rahil */
+    .playbar {
+        position: fixed;
+        top: auto;
+        bottom: 10px;
+        left: 4vw;
+        width: 92vw;
+        height: auto;
+        min-height: 120px;
+        margin-bottom: 0;
+        padding-bottom: 22px;
+        box-sizing: border-box;
+    }
+
+    /* Hamburger 1000px paryant disel (aadhi fakt 900px khali disat hota) */
+    .hamburger {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .hamburger img {
+        display: block;
+    }
+}
